@@ -88,8 +88,8 @@ function refreshTimelines(sensitivityLevel) {
 			maxSpotColor : false, lineWidth : 3, lineColor : '#777', barColor : 'red', chartRangeMin : 0, fillColor : '#fef8f8' });
 	
 	for (var i = 101; i <= 108; i++) {
-		$(".lightbox." + i + 'rad').colorbox({ rel: i + 'rad', transition:"none", width:"70%", height:"70%", current: "Viser {current} av {total}" });
-		$(".lightbox." + i + 'jou').colorbox({ rel: i + 'jou', transition:"none", width:"50%", height:"95%", current: "Viser {current} av {total}" });
+		$(".lightbox." + i + 'rad').colorbox({ rel: i + 'rad', transition:"none", width:"70%", height:"70%", current: "Viewing {current} of {total}" });
+		$(".lightbox." + i + 'jou').colorbox({ rel: i + 'jou', transition:"none", width:"50%", height:"95%", current: "Viewing {current} of {total}" });
 	}
 	
 	$('div.event_text').hide();

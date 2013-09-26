@@ -66,7 +66,7 @@ function Event(patient, type, description, age, expectFromMinute, expectationUnc
 					
 				    $.each(this.attachments, function(i, resource) {
 				    	if (i == 0)
-							html += '<p style="text-align: right; margin-bottom: 0;"><a class="lightbox ' + roomId + 'jou" href="res/' + resource + '">Les hele notatet..</a></p>';
+							html += '<p style="text-align: right; margin-bottom: 0;"><a class="lightbox ' + roomId + 'jou" href="res/' + resource + '">Read full note..</a></p>';
 				    	else
 				    		html += '<a class="lightbox ' + roomId + 'jou" href="res/' + resource + '" />';		    	
 				   	});				
