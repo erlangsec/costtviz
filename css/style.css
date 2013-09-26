@@ -1,0 +1,354 @@
+body {
+	background-color: #fff;
+	font-family: arial;
+	margin: 0;
+	padding: 10px;
+	width: 1900px;
+}
+
+a {
+	font-size: 14px;
+	padding: 2px 0 2px 0;
+}
+
+ul#timelines {
+	float: left;
+	width: 1680px;
+	margin: 0; 
+	padding: 0;
+	list-style: none;
+}
+	
+	li.timeline {
+		float: left;
+		width: 200px;
+		margin-right: 10px;
+	}
+	
+	ul.future, ul.events {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+	
+		ul.future li.event, ul.events li.event {
+			margin-bottom: 10px;
+		}
+		
+	div.future_wrap {
+		position: relative;
+		height: 180px;
+	}
+	
+		ul.future {
+			position: absolute;
+			bottom: 0;
+			width: 200px;
+		}
+		
+
+	#timeline_overlay {
+		background: transparent url('../gfx/gradient.png') no-repeat;
+		width: 300px;
+		height: 515px;
+		position: absolute;
+		top: 300px;
+		left: 0; 
+	}
+
+.label {
+	text-align: center;
+	font-size: 21px;
+	color: #fff;
+}
+
+.time_label {
+	float: right;
+	font-size: 14px;
+	margin: 1px 8px 4px 8px;
+}
+
+	.time_label.faded {
+		font-size: 11px;
+		margin: 2px 4px 4px 8px;
+		opacity: 0.8;
+	}
+
+.event_heading {
+	clear: both;
+	font-size: 16px;
+    padding: 8px 8px 6px 8px;
+    cursor: pointer;
+}
+
+.event_text {
+	clear: both;
+	background-color: #fff;
+	border-radius: 3px;
+	margin: 0 5px 5px 5px;
+	color: #444;
+	padding: 5px;
+	font-size: 12px;
+	width: 176px;
+	line-height: 1.4;
+}
+
+.icon {
+	background-repeat: no-repeat;
+	background-position: 10px center;
+}
+	.icon.lab {
+		background-image: url('../gfx/lab.png');
+		background-position: 10px 5px;
+	}
+	.icon.radiology {
+		background-image: url('../gfx/radiology.png');
+		background-position: 5px center;
+	}
+	.icon.surgery {
+		background-image: url('../gfx/surgery.png');
+		background-position: 5px center;
+	}
+	.icon.journal {
+		background-image: url('../gfx/journal.png');
+	}
+	.icon.comment {
+		background-image: url('../gfx/comment.png');
+		background-position: 5px center;
+	}
+
+	
+.event {
+	border-radius: 0.4em;
+	min-height: 34px;
+	border: 2px solid rgba(255, 255, 255, 0.98);
+    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.2);
+    color: #fff;
+    padding: 0 0 0 0;
+}
+
+	.event.future {
+		opacity: 0.6;
+		border-style: dashed;
+		border-width: 2px;
+	}
+
+	.event.lab {
+		background-color: #ff0000;
+	}
+		.event.lab.medium {
+			background-color: rgba(255,0,0,0.4);
+		}
+		
+	.event.radiology {
+		background-color: #1a1a1a;
+	}
+		.event.radiology.medium {
+			background-color: rgba(26,26,26,0.65);
+		}
+		
+	.event.surgery {
+		background-color: rgba(0,128,0,0.9);
+	}
+		.event.surgery.medium {
+			background-color: rgba(0,128,0,0.4);
+		}
+		
+	.event.journal {
+		background-color: #3737c8;
+	}		
+		.event.journal.medium {
+			background-color: rgba(55,55,200,0.3);
+		}
+		
+	.event.comment {
+		background-color: #ffb300;
+	}
+		.event.comment.medium {
+			background-color: rgba(255,179,0,0.5);
+		}
+	
+	.event.medium.icon {
+	}
+	
+	.event.old {
+		color: #fff;
+		color: #888;
+		background-color: rgb(210,210,210);
+		background-color: #fff;
+		background-image: none;
+	}
+	
+		.event.old .event_heading {
+			color: #ccc;
+		}
+	
+div.patient {
+	margin: 5px 0 15px 0;
+}
+
+	div.patient_label {
+		color: #333;
+		font-size: 16px;
+		padding: 4px 0 3px 0;
+		line-height: 1.3;
+		background-color: #fafafa;
+		color: #AAA;
+		text-align: center;
+		height: 50px;
+		vertical-align:middle;
+		display: table-cell;
+		width: 200px;
+		cursor: pointer;
+	}
+
+.lab_label {
+	margin: 5px 0 0 3px;
+	font-size: 12px;
+	color: #777;
+}
+
+.radiology_thumb {
+	width: 176px;
+	margin-top: 10px;
+}
+
+a.send_btn {
+	display: block;
+	width: 160px;
+	height: 32px;
+	background: url('../gfx/send.png') no-repeat center;
+}
+
+#control {
+	float: left;
+	width: 220px;
+	height: 980px;
+	position: relative;
+}
+
+	#controls {
+		position: absolute;
+		bottom: 0;
+	}
+	
+	a#login_smartcard {
+		width: 220px;
+		height: 244px;
+		display: block;
+		background: url('../gfx/smartcard.jpg') no-repeat center;
+		text-align: center;
+		font-size: 22px;
+		color: #777;
+		text-decoration: none;
+		padding-top: 60px;
+		line-height: 1.6;
+	}	
+
+#stage_control {
+	position: absolute;
+	top: 950px;
+	opacity: 0.3;	
+}
+
+input.button {
+	padding: 20px 10px 20px 10px;
+	font-size: 16px;
+	width: 100px;
+	margin-top: 20px;
+	color: #555;
+}
+
+	input.pindigit {
+		width: 60px;
+		height: 60px;
+		font-size: 30px;
+		text-align: center;
+	}
+
+	
+	input#reveal_pinpanel {
+		display: block;
+		text-decoration: none;
+		font-size: 25px;
+		font-weight: bold;
+		white-space: normal;
+		width: 194px;
+		padding: 20px 10px 20px 10px;
+		margin: 0 auto;
+	}
+
+#login_info {
+	margin: 10px 0 0 0;
+	float: right; 
+	font-size: 14px;
+	color: #666666;
+	line-height: 1.5;
+}
+
+	#login_info td {
+		text-align: center;
+	}
+
+	input#logout_btn {
+		margin: 0;
+		font-size: 30px;
+		font-weight: bold;
+		padding: 20px 35px 20px 35px;
+		color: #222;
+	}
+
+#pincode_panel {
+	display: none;
+}
+
+div.warning {
+	color: #ff0000;
+	background-color: #fef8f8;
+	padding: 5px;
+	font-size: 15px;
+	text-align: center;
+}
+
+#digiclock {
+	float: right;  
+	-moz-transform: scale(0.5);
+  	-webkit-transform: scale(0.5);
+  	position: absolute;
+	top: -60px;
+	right: -140px;
+	z-index: 3;
+}
+
+	#left_arrow, #right_arrow {
+		display: none;
+	}
+
+	#plugin_container {
+		height: 300px;
+	}
+	#digital_container {
+		height: 300px;
+		top: 0;
+	}	
+	
+.sparkline {
+	display: block;
+	margin: 5px 0 0 0;
+}
+
+.gray {
+	color: #888;	
+}
+
+.clear {
+	clear: both;
+}
+
+.clearfix:after {
+   content: ".";
+   visibility: hidden;
+   display: block;
+   height: 0;
+   clear: both;
+}

@@ -1,0 +1,286 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<title>COSTTVIZ - English</title>
+	<link href="css/jquery.jdigiclock.css" media="all" rel="stylesheet" type="text/css" />
+	<link href="css/jquery.colorbox.css" media="all" rel="stylesheet" type="text/css" />
+	<link href="css/style.css" media="all" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<ul id="timelines" class="clearfix">
+	<li class="timeline" id="101">
+		<div class="future_wrap"><ul class="future" id="f101"></ul></div>
+		<div class="patient" id="p101"></div>
+		<ul class="events" id="e101"></ul>
+	</li>
+	<li class="timeline" id="102">
+		<div class="future_wrap"><ul class="future" id="f102"></ul></div>
+		<div class="patient" id="p102"></div>
+		<ul class="events" id="e102"></ul>
+	</li>
+	<li class="timeline" id="103">
+		<div class="future_wrap"><ul class="future" id="f103"></ul></div>
+		<div class="patient" id="p103"></div>
+		<ul class="events" id="e103"></ul>
+	</li>
+	<li class="timeline" id="104">
+		<div class="future_wrap"><ul class="future" id="f104"></ul></div>
+		<div class="patient" id="p104"></div>
+		<ul class="events" id="e104"></ul>
+	</li>
+	<li class="timeline" id="105">
+		<div class="future_wrap"><ul class="future" id="f105"></ul></div>
+		<div class="patient" id="p105"></div>
+		<ul class="events" id="e105"></ul>
+	</li>
+	<li class="timeline" id="106">
+		<div class="future_wrap"><ul class="future" id="f106"></ul></div>
+		<div class="patient" id="p106"></div>
+		<ul class="events" id="e106"></ul>
+	</li>
+	<li class="timeline" id="107">
+		<div class="future_wrap"><ul class="future" id="f107"></ul></div>
+		<div class="patient" id="p107"></div>
+		<ul class="events" id="e107"></ul>
+	</li>
+	<li class="timeline" id="108">
+		<div class="future_wrap"><ul class="future" id="f108"></ul></div>
+		<div class="patient" id="p108"></div>
+		<ul class="events" id="e108"></ul>
+	</li>
+</ul>
+<div id="control">
+	<div id="digiclock"></div>
+	<div id="controls">
+		<div id="login_info" style="display: none;">
+			<table cellpadding="10">
+				<tr>
+					<td></td>
+				</tr>
+				<tr>
+					<td>
+						<div id="pincode_panel">
+							<h3>Enter PIN code:</h3>
+							<table width="100%">
+								<tr>
+									<td><input type="button" class="pindigit" value="1" onclick="enterPin(1);" /></td>
+									<td><input type="button" class="pindigit" value="2" onclick="enterPin(2);" /></td>
+									<td><input type="button" class="pindigit" value="3" onclick="enterPin(3);" /></td>
+								</tr>
+								<tr>
+									<td><input type="button" class="pindigit" value="4" onclick="enterPin(4);" /></td>
+									<td><input type="button" class="pindigit" value="5" onclick="enterPin(5);" /></td>
+									<td><input type="button" class="pindigit" value="6" onclick="enterPin(6);" /></td>
+								</tr>
+								<tr>
+									<td><input type="button" class="pindigit" value="7" onclick="enterPin(7);" /></td>
+									<td><input type="button" class="pindigit" value="8" onclick="enterPin(8);" /></td>
+									<td><input type="button" class="pindigit" value="9" onclick="enterPin(9);" /></td>
+								</tr>
+								<tr>
+									<td><input type="button" class="pindigit" value="*" /></td>
+									<td><input type="button" class="pindigit" value="0" onclick="enterPin(0);" /></td>
+									<td><input type="button" class="pindigit" value="#" /></td>
+								</tr>
+							</table>
+						</div>
+						<input type="button" id="reveal_pinpanel" onclick="$(this).hide(); $('#pincode_panel').show();" value="Enter PIN code for more details.." />
+					</td>
+				</tr>
+				<tr>
+					<td width="100"><span id="logon_label">Identified as</span>:<br/><b>T. K. Goodlowe</b><br/><small>Phone: 71324</small></td>
+				</tr>
+				<tr>
+					<td><img src="gfx/user.jpg" alt="" /></td>
+				</tr>
+				<tr>
+					<td><input type="button" id="logout_btn" value="Log off" onclick="$('#auth').attr('value', 0); refreshTimelines(0); $('#login_info').hide();  $('#login_smartcard').show();" /></td>
+				</tr>
+			</table>
+		</div>
+		<a id="login_smartcard" href="javascript:void(0);" onclick="$('#login_info').show(); $('#auth').attr('value', 1); refreshTimelines(1); $(this).hide();"><b>Authenticate</b><br/>by touching<br/>ID-card here..</a>
+		<input type="hidden" name="stage" id="stage" value="0" />
+		<input type="hidden" name="auth" id="auth" value="0" />
+		<input type="hidden" name="pin" id="pin" value="0" />
+		<input type="hidden" name="openId" id="open_id" value="" />
+	</div>
+</div>
+<div id="stage_control" style="">
+	<input class="button" type="button" value="Neste &raquo;" onclick="var stage = parseInt($('#stage').attr('value')); createEvents(stage); $('#stage').attr('value', stage+1); $('#login_info').hide();" />
+</div>
+<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui-1.8.16.min.js"></script>
+<script type="text/javascript" src="js/excanvas.js"></script>
+<script type="text/javascript" src="js/jquery.sparkline.js"></script>
+<script type="text/javascript" src="js/jquery.colorbox.js"></script>
+<script type="text/javascript" src="js/jquery.jdigiclock.js"></script>
+<script type="text/javascript" src="js/jquery.coolclock.js"></script>
+<script type="text/javascript" src="js/enums.js"></script>
+<script type="text/javascript" src="js/costtviz-models.js"></script>
+<script type="text/javascript" src="js/costtviz-utils.js"></script>
+<script type="text/javascript" src="js/costtviz.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	$('#digiclock').jdigiclock();
+	//$('#clock').coolclock();
+	
+  var thomas = new Patient("Thomas Anderson", "T. Anderson", "T.A.", "12-03-1982", "1982", "510");
+  var marianne = new Patient("Mary Benson", "M. Benson", "M.B.", "04-12-1976", "1976", "511");
+  var mona = new Patient("Monica Lot", "M. Lot", "M.L.", "07-27-1946", "1946", "512");
+  var jorunn = new Patient("Janet Marsh", "J. Marsh", "J.M.", "12-13-1944", "1944", "513");
+  var gerd = new Patient("Gerda Dempsey", "G. Dempsey", "G.D.", "02-05-1938", "1938", "514");
+  var morten = new Patient("Mark Henderson", "M. Henderson", "M.H.", "08-30-1964", "1964", "515");
+  var odd = new Patient("Oliver Hansson", "O. Hansson", "O.H.", "01-31-1950", "1950", "516");
+  var gunnar = new Patient("Gabriel Veron", "G. Veron", "G.V.", "05-19-1923", "1923", "517");
+	
+	e1 = new EventQueue(thomas);
+	e1.add(new Event(thomas, eventType.JOURNAL, "Arrival", 1980, 0, 0, ' ', ['innkomstjournal_empty.png']));
+	e1.add(new Event(thomas, eventType.COMMENT, "Hospitalized", 1880, 0, 0, "Referred by Dr. Red. Appendicitis?"));
+	e1.add(new Event(thomas, eventType.LAB, "Na", 1800, 0, 0,[["Na: 141 mmol/L","141"]]));
+	e1.add(new Event(thomas, eventType.LAB, "K", 1789, 0, 0,[["K: 4,1 mmol/L","4.1"]]));
+	e1.add(new Event(thomas, eventType.LAB, "Creatinine", 1788, 0, 0,[["Creatinine: 83","83"]]));
+	e1.add(new Event(thomas, eventType.LAB, "CRP", 1780, 0, 0,[["CRP: 3.5 g/dL (H)","3.5"]]));
+	e1.add(new Event(thomas, eventType.LAB, "Leukocytes", 1769, 0, 0,[["Leukocytes: 15,3 (H)","15.3"]]));
+	e1.add(new Event(thomas, eventType.LAB, "ALAT", 1766, 0, 0,[["ALAT: 12","12"]]));
+	e1.add(new Event(thomas, eventType.LAB, "GT", 1750, 0, 0,[["GT: 21","21"]]));
+	e1.add(new Event(thomas, eventType.LAB, "Amylase", 1748, 0, 0,[["Amylase: 63","63"]]));
+	e1.add(new Event(thomas, eventType.LAB, "CRP",720, 0, 0,[["CRP: 4 g/dL (H)","3.5,4"]]));
+	f1 = new UpcomingQueue();
+	
+	e2 = new EventQueue(marianne);
+	//e2.add(new Event(marianne, eventType.LAB, "Na, K", 404, 0, 0, [["Na: 140", "130,140,122,140"], ["K: 4", "4,3.8,4"]]));
+	e2.add(new Event(marianne, eventType.JOURNAL, "Med. attention", 15066, 0, 0, "Patient has developed cancer last week with urination problems and back pain. Refleksene i underekstremitetene er svekket bilateralt. Det er således trolig snakk om..."));
+	f2 = new UpcomingQueue();
+	
+	e3 = new EventQueue(mona);
+	//e3.add(new Event(mona, eventType.LAB, "CRP, INR, Hb, Bilirubin, Na, K", 104, 0, 0, [["CRP: 126 mg/l (H)", "40,48,70,40,33,75,126"],["INR: 1","1"],["Hb: 12,6","12.4,12.6"]]));
+	e3.add(new Event(mona, eventType.JOURNAL, "Arrival", 5036, 0, 0, ' ', ['innkomstjournal_empty.png']));
+	e3.add(new Event(mona, eventType.RADIOLOGY, "CT referred", 5000, 0, 0, 'CT Abdomen, within 24 timer'));
+	e3.add(new Event(mona, eventType.RADIOLOGY, "CT images", 4100, 0, 0, '5 images', ['gerd1.jpg','gerd2.jpg','gerd3.jpg','gerd4.jpg','gerd5.jpg']));
+	e3.add(new Event(mona, eventType.RADIOLOGY, "CT description", 6774, 0, 0));
+	e3.add(new Event(mona, eventType.LAB, "Lipase", 6488, 0, 0,[["Lipase: 160","160"]]));
+	e3.add(new Event(mona, eventType.LAB, "Amylase", 6448, 0, 0,[["Amylase: 301","301"]]));
+	e3.add(new Event(mona, eventType.LAB, "CRP", 6420, 0, 0,[["CRP: 204 g/dL (H)","204"]]));
+	e3.add(new Event(mona, eventType.LAB, "CRP", 5020, 0, 0,[["CRP: 88 g/dL (H)","204,183"]]));
+	e3.add(new Event(mona, eventType.LAB, "Amylase", 5018, 0, 0,[["Amylase: 126","301,275"]]));
+	e3.add(new Event(mona, eventType.LAB, "Lipase", 5000, 0, 0,[["Lipase: 93","160,93"]]));
+	e3.add(new Event(mona, eventType.LAB, "Amylase", 3548, 0, 0,[["Amylase: 126","301,275,232"]]));
+	e3.add(new Event(mona, eventType.LAB, "CRP", 3520, 0, 0,[["CRP: 88 g/dL (H)","204,183,170"]]));
+	e3.add(new Event(mona, eventType.LAB, "Amylase", 2148, 0, 0,[["Amylase: 126","301,275,232,180"]]));
+	e3.add(new Event(mona, eventType.LAB, "CRP", 2120, 0, 0,[["CRP: 88 g/dL (H)","204,183,170,113"]]));
+	e3.add(new Event(mona, eventType.LAB, "Amylase", 748, 0, 0,[["Amylase: 126","301,275,232,180,126"]]));
+	e3.add(new Event(mona, eventType.LAB, "CRP", 720, 0, 0,[["CRP: 88 g/dL (H)","204,183,170,113,88"]]));
+	f3 = new UpcomingQueue();
+	
+	e4 = new EventQueue(jorunn);
+	e4.add(new Event(jorunn, eventType.COMMENT, "Hospitalized", 4880, 0, 0, "Referred by Dr. Schwarz. Cholecystitis or gallstone?"));
+	e4.add(new Event(jorunn, eventType.JOURNAL, "Arrival", 4636, 0, 0, 'Cholecystitis or gallstone?', ['innkomstjournal_empty.png']));
+	e4.add(new Event(jorunn, eventType.LAB, "Leukocytes", 4500, 0, 0,[["Leukocytes: 17","17"]]));
+	e4.add(new Event(jorunn, eventType.LAB, "Hb", 4500, 0, 0,[["Hb: 12,4 g/dL","12.4"]]));
+	e4.add(new Event(jorunn, eventType.LAB, "CRP", 4500, 0, 0,[["CRP: 102 g/dL","102"]]));
+	e4.add(new Event(jorunn, eventType.LAB, "Leukocytes", 3100, 0, 0,[["Leukocytes: 11,3","17,11.3"]]));
+	e4.add(new Event(jorunn, eventType.LAB, "CRP", 3000, 0, 0,[["CRP: 92 g/dL","102,92"]]));
+	e4.add(new Event(jorunn, eventType.RADIOLOGY, "US referred", 1900, 0, 0, 'UL Abdomen, innen 24 timer'));
+	e4.add(new Event(jorunn, eventType.RADIOLOGY, "US images", 1700, 0, 0, '5 images', ['gerd1.jpg','gerd2.jpg','gerd3.jpg','gerd4.jpg','gerd5.jpg']));
+	e4.add(new Event(jorunn, eventType.RADIOLOGY, "US description", 1664, 0, 0, 'Kolangitt', ['gerddahl_CT-beskrivelse.png']));
+	e4.add(new Event(jorunn, eventType.LAB, "Leukocytes", 1500, 0, 0,[["Leukocytes: 7.9","17,11.3,7.9"]]));
+	e4.add(new Event(jorunn, eventType.LAB, "CRP", 1500, 0, 0,[["CRP: 71 g/dL","102,92,71"]]));
+	e4.add(new Event(jorunn, eventType.LAB, "Hb", 620, 0, 0,[["Hb: 12,4 g/dL","12.4,12.4"]]));
+	e4.add(new Event(jorunn, eventType.LAB, "Leukocytes", 612, 0, 0,[["Leukocytes: 7.4","17,11.3,7.9,7.4"]]));
+	e4.add(new Event(jorunn, eventType.LAB, "CRP", 610, 0, 0,[["CRP: 37 g/dL","102,92,71,37"]]));
+	f4 = new UpcomingQueue();
+	f4.add(new Event(jorunn, eventType.RADIOLOGY, "MRCP referred", -720, 0, 0, 'Kl. 1100. Faste fra midnatt.'));
+	
+	e5 = new EventQueue(gerd);
+	e5.add(new Event(gerd, eventType.RADIOLOGY, "CT referred", 5000, 0, 0, 'CT Abdomen, innen 24 timer'));
+	e5.add(new Event(gerd, eventType.LAB, "K", 4500, 0, 0,[["K: 2,9 mmol/L","2.9"]]));
+	e5.add(new Event(gerd, eventType.LAB, "Na", 4500, 0, 0,[["Na: 134 mmol/L","134"]]));
+	e5.add(new Event(gerd, eventType.LAB, "GT", 4500, 0, 0,[["GT: 73","73"]]));
+	e5.add(new Event(gerd, eventType.LAB, "ALAT", 4500, 0, 0,[["ALAT: 56","56"]]));
+	e5.add(new Event(gerd, eventType.LAB, "Creatinine", 4500, 0, 0,[["Kreatinin: 92","92"]]));
+	e5.add(new Event(gerd, eventType.LAB, "Leukocytes", 4500, 0, 0,[["Leukocytes: 14,2","14.2"]]));
+	e5.add(new Event(gerd, eventType.LAB, "Hb", 4500, 0, 0,[["Hb: 10,4 g/dL","10.4"]]));
+	e5.add(new Event(gerd, eventType.LAB, "CRP", 4400, 0, 0,[["CRP: 36 g/dL","36"]]));
+	e5.add(new Event(gerd, eventType.RADIOLOGY, "CT images", 4100, 0, 0, '5 images', ['gerd1.jpg','gerd2.jpg','gerd3.jpg','gerd4.jpg','gerd5.jpg']));
+	e5.add(new Event(gerd, eventType.RADIOLOGY, "CT description", 4000, 0, 0, 'Mechanical small intestine ileus.', ['gerddahl_CT-beskrivelse.png']));
+	e5.add(new Event(gerd, eventType.LAB, "CRP", 3300, 0, 0,[["CRP: 24 g/dL","36,24"]]));
+	e5.add(new Event(gerd, eventType.JOURNAL, "Journal", 3000, 0, 0, "Clinical improvement. Removing TPN today and try with fluid liquid."));
+	e5.add(new Event(gerd, eventType.LAB, "CRP", 1880, 0, 0,[["CRP: 21 g/dL","36,24,21"]]));
+	e5.add(new Event(gerd, eventType.LAB, "CRP", 840, 0, 0,[["CRP: 12 g/dL","36,24,21,12"]]));
+	e5.add(new Event(gerd, eventType.JOURNAL, "Referred attention", 526, 0, 0));
+	
+	f5 = new UpcomingQueue();
+	f5.add(new Event(gerd, eventType.JOURNAL, "Med. attention", -126, 0, 500));
+	
+	e6 = new EventQueue(morten);
+	e6.add(new Event(morten, eventType.COMMENT, "Arrival", 880, 0, 0, "Henvist av Dr. Rød. Appendicitt?"));
+	e6.add(new Event(morten, eventType.LAB, "Na", 800, 0, 0,[["Na: 141 mmol/L","141"]]));
+	e6.add(new Event(morten, eventType.LAB, "K", 789, 0, 0,[["K: 4,1 mmol/L","4.1"]]));
+	e6.add(new Event(morten, eventType.LAB, "Creatinine", 788, 0, 0,[["Kreatinin: 83","83"]]));
+	e6.add(new Event(morten, eventType.LAB, "CRP", 780, 0, 0,[["CRP: 36 g/dL (H)","36"]]));
+	e6.add(new Event(morten, eventType.LAB, "Leukocytes", 769, 0, 0,[["Leukocytes: 15,3 (H)","15.3"]]));
+	e6.add(new Event(morten, eventType.LAB, "ALAT", 766, 0, 0,[["ALAT: 12","12"]]));
+	e6.add(new Event(morten, eventType.LAB, "GT", 750, 0, 0,[["GT: 21","21"]]));
+	e6.add(new Event(morten, eventType.LAB, "Amylase", 748, 0, 0,[["Amylase: 63","63"]]));
+	e6.add(new Event(morten, eventType.SURGERY, "Scheduled", 700, 0, 0, 'Appendicitt', ['morten_operasjonsmelding.png']));
+	e6.add(new Event(morten, eventType.JOURNAL, "Arrival", 680, 0, 0, ' ', ['innkomstjournal_empty.png']));
+	e6.add(new Event(morten, eventType.SURGERY, "Entered surgery", 500, 0, 0));
+	e6.add(new Event(morten, eventType.SURGERY, "Started", 450, 0, 0));
+	e6.add(new Event(morten, eventType.SURGERY, "Finished", 350, 0, 0));
+	e6.add(new Event(morten, eventType.SURGERY, "To post.op.", 300, 0, 0));
+	e6.add(new Event(morten, eventType.SURGERY, "Back at ward", 180, 0, 0));
+	f6 = new UpcomingQueue();
+	f6.add(new Event(morten, eventType.COMMENT, "Nurse", -21, 0, 0, "Squirt vomiting with intake of evening meal."));
+	
+	e7 = new EventQueue(odd);
+	e7.add(new Event(odd, eventType.JOURNAL, "Arrival", 36, 0, 0, 'Mage-bryst-smerter over tid. Nå akutt forverring. Har øm buk, men normale lyder. Mulig tegn til iskemi på EKG. Knatring basalt på lungene.', ['oddhansen_innkomst_1.png','oddhansen_innkomst_2.png']));
+	e7.add(new Event(odd, eventType.RADIOLOGY, "X-Ray referred", 31, 0, 0, 'X-Ray thorax.<br/>X-Ray abdomen.<br/>Øyeblikkelig hjelp.', ['odd_rtghenvisning.png']));
+	e7.add(new Event(odd, eventType.LAB, "Na", 14, 0, 0, [["Na: 140", "140"]]));
+	e7.add(new Event(odd, eventType.LAB, "K", 13, 0, 0, [["K: 4", "4"]]));
+	f7 = new UpcomingQueue();
+	f7.add(new Event(odd, eventType.LAB, "Hb", -8, 0, 0, [["Hb: 13,1 g/dL", "13.1"]]));
+	f7.add(new Event(odd, eventType.LAB, "Troponin", -9, 0, 0, [["Troponin: 6 ng/L", "6"]]));
+	f7.add(new Event(odd, eventType.RADIOLOGY, "X-Ray images", -12, 0, 0, "Abdomen, thorax. 4 images.", ['oddhansen_rtg1.jpg','oddhansen_rtg2.jpg','oddhansen_rtg4.jpg','oddhansen_rtg4.jpg']));
+	f7.add(new Event(odd, eventType.LAB, "CRP", -13, 0, 0, [["CRP: 290 g/dL (H)", "290"]]));
+	f7.add(new Event(odd, eventType.LAB, "Leukocytes", -14, 0, 0, [["Leukocytes: 5 g/dL", "5"]]));
+	f7.add(new Event(odd, eventType.LAB, "Trobocytes", -14, 0, 0, [["Trombocytes: 300", "300"]]));
+	f7.add(new Event(odd, eventType.LAB, "ALAT", -15, 0, 0, [["ALAT: 53", "53"]]));
+	f7.add(new Event(odd, eventType.LAB, "GT", -15, 0, 0, [["GT: 142", "142"]]));
+	f7.add(new Event(odd, eventType.RADIOLOGY, "X-Ray description", -19, 12, 0, "Free air in abcomen. Ulcus perforans?", ['odd_rtgbeskrivelse.png']));
+	f7.add(new Event(odd, eventType.SURGERY, "Scheduled", -25, null, 0, 'Ulcer with perforation, peritonitis', ['odd_operasjonsmelding.png']));
+	
+	e8 = new EventQueue(gunnar);
+	e8.add(new Event(gunnar, eventType.JOURNAL, "Arrival", 136, 0, 0, ' ', ['innkomstjournal_empty.png']));
+	e8.add(new Event(gunnar, eventType.LAB, "Hb", 129, 0, 0, [["Hb: 8,2 g/dL", "8.2"]]));
+	e8.add(new Event(gunnar, eventType.LAB, "Na", 128, 0, 0, [["Hb: 141 mmol/L", "141"]]));
+	e8.add(new Event(gunnar, eventType.LAB, "K", 127, 0, 0, [["K: 3,9 mmol/L", "3.9"]]));
+	e8.add(new Event(gunnar, eventType.LAB, "Leukocytes", 120, 0, 0, [["Leukocytes: 9 g/dL", "9"]]));
+	e8.add(new Event(gunnar, eventType.LAB, "INR", 105, 0, 0, [["INR: 2,9", "2.9"]]));
+	e8.add(new Event(gunnar, eventType.LAB, "Kreatinin", 102, 0, 0, [["Kreatinin: 78", "78"]]));
+	e8.add(new Event(gunnar, eventType.SURGERY, "Scheduled", 90, 0, 0, 'Ulcer? Bleed per anum.', ['gunnarvik_operasjonsmelding.png']));
+	e8.add(new Event(gunnar, eventType.SURGERY, "Entered surgery", 40, 0, 0, 'Surgery ES 3'));
+	e8.add(new Event(gunnar, eventType.SURGERY, "Started", 23, 0, 0));
+	f8 = new UpcomingQueue();
+	f8.add(new Event(gunnar, eventType.LAB, "Hb", -35, 30, 0, [["Hb: 10,1 g/dL", "8.2,10.1"]]));
+	f8.add(new Event(gunnar, eventType.SURGERY, "Finished", -59, 10, 0));
+	f8.add(new Event(gunnar, eventType.SURGERY, "To post.op.", -61, 59, 0));
+	f8.add(new Event(gunnar, eventType.JOURNAL, "Surgery", -96, null, 0, "Viser til innkomstjournal. Pågåene GI-blødning. Gastroskopi avdekket et blødende ulcus ventriculi. Dette ble først forsøkt...", ['gunnarvik_operasjonsnotat.png']));
+	//f8.add(new Event(gunnar, eventType.LAB, "Hb", -100, 30, 0, [["Hb: 9,6 g/dL", "10.1,9.6"]]));
+
+	
+	rooms = {};
+	rooms['101'] = [thomas, e1, f1];
+	rooms['102'] = [marianne, e2, f2]; 
+	rooms['103'] = [mona, e3, f3]; 
+	rooms['104'] = [jorunn, e4, f4]; 
+	rooms['105'] = [gerd, e5, f5]; 
+	rooms['106'] = [morten, e6, f6]; 
+	rooms['107'] = [odd, e7, f7];
+	rooms['108'] = [gunnar, e8, f8]; 
+	minutesOffset = 0;	
+	refreshTimelines(0);
+});       
+</script>
+</body>
+</html>
