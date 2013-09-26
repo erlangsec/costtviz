@@ -1,4 +1,43 @@
-GNU GENERAL PUBLIC LICENSE
+Copyright (c) 2011 Erlend Andreas Gjære and Børge Lillebo.
+
+This software is licensed under the GPL license v3.
+
+
+*************************************************************************
+
+
+CREDITS TO OTHER PEOPLE'S WORKS, AND THEIR LICENSES:
+----------------------------------------------------
+
+jQuery v1.7.1: Copyright 2011 jQuery Foundation and other contributors
+License: MIT License.
+
+jQuery UI 1.8.16: Copyright 2011, Contributors: http://jqueryui.com/about
+Dual licensed under the MIT or GPL Version 2 licenses.
+
+Sizzle CSS Selector Engine v0.9.3: Copyright 2009, The Dojo Foundation
+Released under the MIT, BSD, and GPL Licenses.
+
+expandAll v.1.3.8.2: Copyright (c) 2009 Adriana Palazova. 
+Dual licensed under the MIT and GPL licenses.
+
+jQuery Sparklines v1.6: Copyright (c) 2010, Splunk Inc.
+License: New BSD License.
+
+jDigiClock plugin v2.1: Copyright (c) 2009 Radoslav Dimov
+Dual licensed under the MIT and GPL licenses.
+
+ColorBox v1.3.19: (c) 2011 Jack Moore
+License: MIT License.
+
+Excanvas: Copyright 2006 Google Inc.
+Licensed under the Apache License, Version 2.0
+
+
+*************************************************************************
+
+                       
+                     GNU GENERAL PUBLIC LICENSE
                        Version 3, 29 June 2007
 
  Copyright (C) 2007 Free Software Foundation, Inc. {http://fsf.org/}
